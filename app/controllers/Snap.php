@@ -1,13 +1,20 @@
 <?php
 
+require_once dirname(__FILE__) . '../../vendor/autoload.php';
+
 
 class Snap extends Controller
 {
     public function __construct()
     {
-        $params = array('server_key' => 'SB-Mid-server-gxOdmq1-eNsrN5ZBiu6SRYpt', 'production' => false);
-        // $this->load->library('midtrans');
-        $this->midtrans("Midtrans")->config($params);
+
+        Veritrans_Config::$serverKey = "SB-Mid-server-gxOdmq1-eNsrN5ZBiu6SRYpt";
+        Veritrans_Config::$isSanitized = true;
+        Veritrans_Config::$isProduction = false;
+        Veritrans_Config::$is3ds = true;
+        // $params = array('server_key' => 'SB-Mid-server-gxOdmq1-eNsrN5ZBiu6SRYpt', 'production' => false);
+        // // $this->load->library('midtrans');
+        // $this->midtrans("Midtrans")->config($params);
     }
 
     public function index()
@@ -90,16 +97,15 @@ class Snap extends Controller
             'duration'  => 2
         );
 
-        $transaction_data = array(
+        $transaction = array(
             'transaction_details' => $transaction_details,
             'item_details'       => $item_details,
             'customer_details'   => $customer_details,
             'credit_card'        => $credit_card,
         );
 
-        error_log(json_encode($transaction_data));
-        $snapToken = $this->midtrans("Midtrans")->getSnapToken($transaction_data);
-        echo json_encode($snapToken);
-        return $snapToken;
+        $snapToken = Veritrans_Snap::getSnapToken($transaction);
+        echo "snapToken = " . $snapToken;
+        // return $snapToken;
     }
 }

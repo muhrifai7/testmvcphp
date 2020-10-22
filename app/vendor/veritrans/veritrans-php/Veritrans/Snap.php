@@ -1,9 +1,11 @@
 <?php
+
 /**
  * Create Snap payment page and return snap token
  *
  */
-class Veritrans_Snap {
+class Veritrans_Snap
+{
 
   /**
    * Create Snap payment page
@@ -24,7 +26,9 @@ class Veritrans_Snap {
    * @return string Snap token.
    * @throws Exception curl error or veritrans error
    */
-  public static function getSnapToken($params) {
+  public static function getSnapToken($params)
+  {
+    var_dump($params);
     return (Veritrans_Snap::createTransaction($params)->token);
   }
 
@@ -71,10 +75,11 @@ class Veritrans_Snap {
     $params = array_replace_recursive($payloads, $params);
 
     $result = Veritrans_SnapApiRequestor::post(
-        Veritrans_Config::getSnapBaseUrl() . '/transactions',
-        Veritrans_Config::$serverKey,
-        $params);
+      Veritrans_Config::getSnapBaseUrl() . '/transactions',
+      Veritrans_Config::$serverKey,
+      $params
+    );
 
     return $result;
-  }  
+  }
 }
