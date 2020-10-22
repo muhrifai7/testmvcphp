@@ -49,7 +49,7 @@ $shipping_address = array(
 $customer_details = array(
     'first_name'    => "Mahasiswa",
     'last_name'     => "Litani",
-    'email'         => "muhrifai554@gmail.com",
+    'email'         => "muhrifai2111@gmail.com",
     'phone'         => "081122334455",
     // 'billing_address'  => $billing_address,
     // 'shipping_address' => $shipping_address
@@ -112,59 +112,59 @@ echo "snapToken = " . $snapToken;
 <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-Qn-opZodkJstvvC8"></script>
 
 <script type="text/javascript">
-    // $(function() {
-    //     $("#chekout-button").on("click", function() {
-    //         location.href = "http://localhost/siakadPayment/public/checkout"
+    $(function() {
+        $("#chekout-button").on("click", function() {
+            location.href = "http://localhost/siakadPayment/public/checkout"
 
-    //     });
+        });
 
-    //     //   snap
-    //     $("#bayar-modal").on("click", function(event) {
-    //         const total = $("#total").val();
-    //         const deskripsi = $("#deskripsi").val();
+        //   snap
+        // $("#bayar-modal").on("click", function(event) {
+        //     const total = $("#total").val();
+        //     const deskripsi = $("#deskripsi").val();
 
-    //         $.ajax({
-    //             url: "http://localhost/siakadPayment/public/snap/token",
-    //             cache: false,
-    //             // data: {
-    //             //     gross_amount: total,
-    //             //     deskripsi: deskripsi,
-    //             // },
-    //             // method: 'post',
-    //             success: function('<?= $snapToken ?>') {
-    //                 //location = data;
-    //                 console.warn('dddddd === ', data)
-    //                 var resultType = document.getElementById("result-type");
-    //                 var resultData = document.getElementById("result-data");
+        //     $.ajax({
+        //         url: "http://localhost/siakadPayment/public/snap/token",
+        //         cache: false,
+        //         // data: {
+        //         //     gross_amount: total,
+        //         //     deskripsi: deskripsi,
+        //         // },
+        //         // method: 'post',
+        //         success: function('<?= $snapToken ?>') {
+        //             //location = data;
+        //             console.warn('dddddd === ', data)
+        //             var resultType = document.getElementById("result-type");
+        //             var resultData = document.getElementById("result-data");
 
-    //                 function changeResult(type, data) {
-    //                     $("#result-type").val(type);
-    //                     $("#result-data").val(JSON.stringify(data));
-    //                     //resultType.innerHTML = type;
-    //                     //resultData.innerHTML = JSON.stringify(data);
-    //                 }
-    //                 snap.pay(data, {
-    //                     onSuccess: function(result) {
-    //                         changeResult("success", result);
-    //                         console.log(result.status_message);
-    //                         console.log(result);
-    //                         $("#payment-form").submit();
-    //                     },
-    //                     onPending: function(result) {
-    //                         changeResult("pending", result);
-    //                         console.log(result.status_message);
-    //                         $("#payment-form").submit();
-    //                     },
-    //                     onError: function(result) {
-    //                         changeResult("error", result);
-    //                         console.log(result.status_message);
-    //                         $("#payment-form").submit();
-    //                     },
-    //                 });
-    //             },
-    //         });
-    //     });
-    // });
+        //             function changeResult(type, data) {
+        //                 $("#result-type").val(type);
+        //                 $("#result-data").val(JSON.stringify(data));
+        //                 //resultType.innerHTML = type;
+        //                 //resultData.innerHTML = JSON.stringify(data);
+        //             }
+        //             snap.pay(data, {
+        //                 onSuccess: function(result) {
+        //                     changeResult("success", result);
+        //                     console.log(result.status_message);
+        //                     console.log(result);
+        //                     $("#payment-form").submit();
+        //                 },
+        //                 onPending: function(result) {
+        //                     changeResult("pending", result);
+        //                     console.log(result.status_message);
+        //                     $("#payment-form").submit();
+        //                 },
+        //                 onError: function(result) {
+        //                     changeResult("error", result);
+        //                     console.log(result.status_message);
+        //                     $("#payment-form").submit();
+        //                 },
+        //             });
+        //         },
+        //     });
+        // });
+    });
     var checkoutBtn = document.getElementById("bayar-modal");
 
     checkoutBtn.onclick = function() {
@@ -181,7 +181,7 @@ echo "snapToken = " . $snapToken;
             onPending: function(result) {
                 console.log('okekeke,process pendiing')
                 $.ajax({
-                    url: "http://localhost/siakadPayment/public/notification",
+                    url: "http://localhost/siakadPayment/public/snap/finish",
                     cache: false,
                     success: function(data) {
                         console.log(data, 'datatata')

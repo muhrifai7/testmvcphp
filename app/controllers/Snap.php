@@ -108,4 +108,16 @@ class Snap extends Controller
         echo "snapToken = " . $snapToken;
         // return $snapToken;
     }
+
+    public function finish()
+    {
+        $result = json_decode($this->input->post('result_data'));
+        echo 'RESULT <br><pre>';
+        var_dump($result);
+        echo '</pre>';
+        $data["title"] = "Pembayaran Anda";
+        $this->view("templates/header", $data);
+        $this->view('checkout/index');
+        $this->view("templates/footer");
+    }
 }

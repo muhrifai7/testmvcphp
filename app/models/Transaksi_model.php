@@ -10,7 +10,7 @@ class Transaksi_model
         $this->db = new Database;
     }
 
-    public function getSnapToken()
+    public function getAll()
     {
         $this->db->query('SELECT * FROM transaksi');
         return $this->db->resultSet();
