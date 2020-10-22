@@ -181,7 +181,7 @@ echo "snapToken = " . $snapToken;
             onPending: function(result) {
                 console.log('okekeke,process pendiing')
                 $.ajax({
-                    url: "http://localhost/siakadPayment/public/snap/finish",
+                    url: "http://localhost/siakadPayment/public/notification",
                     cache: false,
                     success: function(data) {
                         console.log(data, 'datatata')
