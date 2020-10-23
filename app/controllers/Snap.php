@@ -28,61 +28,38 @@ class Snap extends Controller
     public function token()
     {
 
+        $gross_amount = $_POST["gross_amount"];
+        $deskripsi = $_POST["deskripsi"];
+        $firstName = $_POST["firstName"];
+        $lastName = $_POST["lastName"];
+        $email = $_POST["email"];
+        $phone = $_POST["phone"];
         // Requied
         $transaction_details = array(
             'order_id' => rand(),
-            'gross_amount' => 10000, // no decimal allowed for creditcard
+            'gross_amount' => $gross_amount, // no decimal allowed for creditcard
         );
 
         // Optional
         $item1_details = array(
             'id' => 'a1',
-            'price' => 1000,
-            'quantity' => 3,
-            'name' => "Apple"
+            'price' => 10000,
+            'quantity' => 1,
+            'name' => $deskripsi
         );
 
         // Optional
-        $item2_details = array(
-            'id' => 'a2',
-            'price' => 3500,
-            'quantity' => 2,
-            'name' => "Orange"
-        );
+        $item_details = array($item1_details);
 
-        // Optional
-        $item_details = array($item1_details, $item2_details);
 
-        // Optional
-        $billing_address = array(
-            'first_name'    => "Andri",
-            'last_name'     => "Litani",
-            'address'       => "Mangga 20",
-            'city'          => "Jakarta",
-            'postal_code'   => "16602",
-            'phone'         => "081122334455",
-            'country_code'  => 'IDN'
-        );
-
-        // Optional
-        $shipping_address = array(
-            'first_name'    => "Obet",
-            'last_name'     => "Supriadi",
-            'address'       => "Manggis 90",
-            'city'          => "Jakarta",
-            'postal_code'   => "16601",
-            'phone'         => "08113366345",
-            'country_code'  => 'IDN'
-        );
 
         // Optional
         $customer_details = array(
-            'first_name'    => "Andri",
-            'last_name'     => "Litani",
-            'email'         => "andri@litani.com",
-            'phone'         => "081122334455",
-            'billing_address'  => $billing_address,
-            'shipping_address' => $shipping_address
+            'first_name'    => $firstName,
+            'last_name'     => $lastName,
+            'email'         => $email,
+            'phone'         => $phone,
+
         );
 
         // Data yang akan dikirim untuk request redirect_url.
@@ -90,12 +67,6 @@ class Snap extends Controller
         //ser save_card true to enable oneclick or 2click
         //$credit_card['save_card'] = true;
 
-        $time = time();
-        $custom_expiry = array(
-            'start_time' => date("Y-m-d H:i:s O", $time),
-            'unit' => 'minute',
-            'duration'  => 2
-        );
 
         $transaction = array(
             'transaction_details' => $transaction_details,
@@ -105,19 +76,20 @@ class Snap extends Controller
         );
 
         $snapToken = Veritrans_Snap::getSnapToken($transaction);
-        echo "snapToken = " . $snapToken;
-        // return $snapToken;
+        echo $snapToken;
     }
 
     public function finish()
     {
-        $result = json_decode($this->input->post('result_data'));
+        $result = json_decode($_POST['result-data']);
+        // $result = $_POST['transaksi'];s
+
         echo 'RESULT <br><pre>';
         var_dump($result);
         echo '</pre>';
         $data["title"] = "Pembayaran Anda";
         $this->view("templates/header", $data);
-        $this->view('checkout/index');
+        $this->view('checkout/konfirmasi');
         $this->view("templates/footer");
     }
 }

@@ -28,7 +28,6 @@ class Veritrans_Snap
    */
   public static function getSnapToken($params)
   {
-    var_dump($params);
     return (Veritrans_Snap::createTransaction($params)->token);
   }
 

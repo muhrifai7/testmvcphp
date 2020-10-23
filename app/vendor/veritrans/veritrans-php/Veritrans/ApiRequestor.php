@@ -1,10 +1,12 @@
 <?php
+
 /**
  * Send request to Veritrans API
  * Better don't use this class directly, use Veritrans_VtWeb, Veritrans_VtDirect, Veritrans_Transaction
  */
 
-class Veritrans_ApiRequestor {
+class Veritrans_ApiRequestor
+{
 
   /**
    * Send GET request
@@ -44,6 +46,7 @@ class Veritrans_ApiRequestor {
       CURLOPT_HTTPHEADER => array(
         'Content-Type: application/json',
         'Accept: application/json',
+        'Access-Control-Allow-Origin : *',
         'Authorization: Basic ' . base64_encode($server_key . ':')
       ),
       CURLOPT_RETURNTRANSFER => 1,
@@ -55,7 +58,7 @@ class Veritrans_ApiRequestor {
       // We need to combine headers manually, because it's array and it will no be merged
       if (Veritrans_Config::$curlOptions[CURLOPT_HTTPHEADER]) {
         $mergedHeders = array_merge($curl_options[CURLOPT_HTTPHEADER], Veritrans_Config::$curlOptions[CURLOPT_HTTPHEADER]);
-        $headerOptions = array( CURLOPT_HTTPHEADER => $mergedHeders );
+        $headerOptions = array(CURLOPT_HTTPHEADER => $mergedHeders);
       } else {
         $mergedHeders = array();
       }
@@ -87,27 +90,26 @@ class Veritrans_ApiRequestor {
 
     if ($result === FALSE) {
       throw new Exception('CURL Error: ' . curl_error($ch), curl_errno($ch));
-    }
-    else {
+    } else {
       $result_array = json_decode($result);
       if (!in_array($result_array->status_code, array(200, 201, 202, 407))) {
         $message = 'Veritrans Error (' . $result_array->status_code . '): '
-            . $result_array->status_message;
-        if (isset($result_array->validation_messages)){
-            $message .= '. Validation Messages (' . implode(", ", $result_array->validation_messages) . ')';
+          . $result_array->status_message;
+        if (isset($result_array->validation_messages)) {
+          $message .= '. Validation Messages (' . implode(", ", $result_array->validation_messages) . ')';
         }
-        if (isset($result_array->error_messages)){
-            $message .= '. Error Messages (' . implode(", ", $result_array->error_messages) . ')';
+        if (isset($result_array->error_messages)) {
+          $message .= '. Error Messages (' . implode(", ", $result_array->error_messages) . ')';
         }
         throw new Exception($message, $result_array->status_code);
-      }
-      else {
+      } else {
         return $result_array;
       }
     }
   }
 
-  private static function processStubed($curl, $url, $server_key, $data_hash, $post) {
+  private static function processStubed($curl, $url, $server_key, $data_hash, $post)
+  {
     VT_Tests::$lastHttpRequest = array(
       "url" => $url,
       "server_key" => $server_key,
