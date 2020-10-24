@@ -8,22 +8,48 @@
         <!--/.Navbar-->
 
         <!--Section: Products v.3-->
-        <section class="text-center mb-4">
-            <div class="card" style="width: 18rem;">
+        <section class="">
+            <div class="card" style="width: 38rem;">
                 <div class="card-body">
                     <h5 class="card-title">Checkout</h5>
-                    <form>
-                        <div class="form-group">
-                            <label for="total">Total</label>
-                            <input type="numer" class="form-control" id="total" value="10000">
+                    <div class="d-flex flex-row bd-highlight mb-3">
+                        <div class="p-2 bd-highlight">
+                            <div class="form-group">
+                                <label for="total">Total</label>
+                                <input type="numer" class="form-control" id="total" value="10000">
+                            </div>
+                            <div class="form-group">
+                                <label for="deskripsi">Deskripsi</label>
+                                <input type="text" class="form-control" id="deskripsi" placeholder="Pemabayaran sks">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" value="muhrifai2111@gmail.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="phoneNumber">No Telepon</label>
+                                <input type="text" class="form-control" id="phoneNumber" value="082122597253">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="deskripsi">Deskripsi</label>
-                            <input type="text" class="form-control" id="deskripsi" placeholder="Pemabayaran sks">
+                        <div class="p-2 bd-highlight">
+                            <div class="form-group">
+                                <label for="deskripsi">Nama Depan</label>
+                                <input type="text" class="form-control" id="firstName" placeholder="Nama" value="Doe">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Nama Belakang</label>
+                                <input type="text" class="form-control" id="lastName" value="10000" value="John">
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <button id="bayar-modal" class="btn btn-primary">bayar!</button>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                    </div>
+
                     <form id="payment-form" method="post" action="/snap/finish">
                         <input type="hidden" name="result_type" id="result-type" value="">
                 </div>
@@ -31,7 +57,7 @@
             </div>
             </form>
 
-            <button id="bayar-modal">bayar!</button>
+
     </div>
     </div>
     <!--Grid row-->

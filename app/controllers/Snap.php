@@ -81,20 +81,15 @@ class Snap extends Controller
 
     public function finish()
     {
-        $result = json_decode($_POST['transaksi']);
+
         $result = $_POST['transaksi'];
         // craete ke database
-        echo 'RESULT <br><pre>';
-        var_dump($result);
-
-        echo $result["status_message"];
-        echo '</pre>';
-        var_dump($_POST);
         $this->model('Transaksi_model')->addDataTransaction($_POST["transaksi"]);
         $data["title"] = "Pembayaran Anda";
         $this->view("templates/header", $data);
         $this->view('checkout/konfirmasi');
         $this->view("templates/footer");
+        header("Location: http://localhost/siakadPayment/checkout/konfirmasi");
     }
 }
 

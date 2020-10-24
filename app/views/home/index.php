@@ -16,7 +16,7 @@
 
                 <!--Grid column-->
                 <div class="col-lg-3 col-md-6 mb-4">
-                    <pre><div id="result-json">JSON result will appear here after payment:<br></div></pre>
+
                     <!--Card-->
                     <div class="card">
 

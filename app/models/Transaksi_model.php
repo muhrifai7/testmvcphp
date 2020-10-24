@@ -18,20 +18,20 @@ class Transaksi_model
     public function addDataTransaction($data)
     {
         var_dump($data);
-        $date = date('Y-m-d H:i:s');
-        $data["status_code"] = "201";
-        $data["status_message"] = "Pending";
-        $data["transaction_id"] = "transaction_id";
-        $data["order_id"] = "order_id";
-        $data["gross_amount"] = "20gross_amount1";
-        $data["payment_type"] = "payment_type";
-        $data["transaction_time"] = $date;
-        $data["transaction_status"] = "Pending";
-        $data["va_numbers"] = "201";
-        $data["bank"] = "Pending";
-        $data["fraud_status"] = "201";
-        $data["pdf_url"] = "Pending";
-        $data["finish_redirect_url"] = "201";
+        // $date = date('Y-m-d H:i:s');
+        // $data["status_code"] = "201";
+        // $data["status_message"] = "Pending";
+        // $data["transaction_id"] = "transaction_id";
+        // $data["order_id"] = "order_id";
+        // $data["gross_amount"] = "20gross_amount1";
+        // $data["payment_type"] = "payment_type";
+        // $data["transaction_time"] = $date;
+        // $data["transaction_status"] = "Pending";
+        // $data["va_numbers"] = "201";
+        // $data["bank"] = "Pending";
+        // $data["fraud_status"] = "201";
+        // $data["pdf_url"] = "Pending";
+        // $data["finish_redirect_url"] = "201";
         $query = "INSERT INTO transaksi
                      VALUES
         			  ('', :status_code, :status_message, :transaction_id, :order_id, :gross_amount, :payment_type, :transaction_time, :transaction_status, :va_numbers, :bank, :fraud_status, :pdf_url, :finish_redirect_url)";

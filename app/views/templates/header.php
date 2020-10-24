@@ -71,7 +71,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link waves-effect" href="http://localhost/siakadPayment/public/transaksi">Transaksi
+                        <a class="nav-link waves-effect" href="<?= base_url ?>transaksi">Transaksi
                         </a>
                     </li>
 
