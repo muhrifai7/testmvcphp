@@ -4,6 +4,7 @@ class Database
 {
     //koneksi kedata base dengan pdo
     //tampung si pdo
+
     private $host = DB_HOST;
     private $user = DB_USER;
     private $pass = "";

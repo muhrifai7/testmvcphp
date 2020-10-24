@@ -15,13 +15,13 @@
 
 <!-- SCRIPTS -->
 <!-- JQuery -->
-<script type="text/javascript" src="http://localhost/siakadPayment/public/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="<?= base_url ?>js/jquery-3.4.1.min.js"></script>
 <!-- Bootstrap tooltips -->
-<script type="text/javascript" src="http://localhost/siakadPayment/public/js/popper.min.js"></script>
+<script type="text/javascript" src="<?= base_url ?>js/popper.min.js"></script>
 <!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="http://localhost/siakadPayment/public/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<?= base_url ?>js/bootstrap.min.js"></script>
 <!-- MDB core JavaScript -->
-<script type="text/javascript" src="http://localhost/siakadPayment/public/js/mdb.min.js"></script>
+<script type="text/javascript" src="<?= base_url ?>js/mdb.min.js"></script>
 <!-- Initializations -->
 <script type="text/javascript">
     // Animations initialization
@@ -33,17 +33,17 @@
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
 <!-- Bootstrap core CSS -->
-<link href="http://localhost/siakadPayment/public/css/bootstrap.min.css" rel="stylesheet">
+<link href="<?= base_url ?>css/bootstrap.min.css" rel="stylesheet">
 <!-- Material Design Bootstrap -->
-<link href="http://localhost/siakadPayment/public/css/mdb.min.css" rel="stylesheet">
+<link href="<?= base_url ?>css/mdb.min.css" rel="stylesheet">
 <!-- Your custom styles (optional) -->
-<!-- <link href="http://localhost/siakadPayment/public/css/style.min.css" rel="stylesheet"> -->
+<!-- <link href="<?= base_url ?>css/style.min.css" rel="stylesheet"> -->
 <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-Qn-opZodkJstvvC8"></script>
 
 <script type="text/javascript">
     $(function() {
         $("#chekout-button").on("click", function() {
-            location.href = "http://localhost/siakadPayment/public/checkout"
+            location.href = "<?= base_url ?>checkout"
 
         });
 
@@ -56,7 +56,7 @@
             const email = "muhrifai554@gmail.com";
             const phone = "082122597253";
             $.ajax({
-                url: "http://localhost/siakadPayment/public/snap/token",
+                url: "<?= base_url ?>snap/token",
                 cache: false,
                 data: {
                     gross_amount: total,
@@ -89,11 +89,10 @@
                         onPending: function(result) {
                             changeResult("pending", result);
                             console.log(result.status_message);
-                            $("#payment-form").submit();
+                            // $("#payment-form").submit();
                             console.log('okekeke,process pendiing')
-                            // location.href = "http://localhost/siakadPayment/public/snap/finish"
                             $.ajax({
-                                url: "http://localhost/siakadPayment/public/snap/finish",
+                                url: "<?= base_url ?>snap/finish",
                                 cache: false,
                                 data: {
                                     transaksi: result

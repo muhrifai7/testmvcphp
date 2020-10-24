@@ -8,9 +8,9 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
     <!-- Bootstrap core CSS -->
-    <link href="http://localhost/siakadPayment/public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= base_url ?>css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
-    <link href="http://localhost/siakadPayment/public/css/mdb.min.css" rel="stylesheet">
+    <link href="<?= base_url ?>css/mdb.min.css" rel="stylesheet">
 
     <style type="text/css">
         html,
@@ -66,12 +66,12 @@
                 <!-- Left -->
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link waves-effect" href="http://localhost/siakadPayment/public/">Home
+                        <a class="nav-link waves-effect" href="<?= base_url ?>">Home
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link waves-effect" href="http://localhost/siakadPayment/public/transaksi">Transaksi
+                        <a class="nav-link waves-effect" href="<?= base_url ?>transaksi">Transaksi
                         </a>
                     </li>
 

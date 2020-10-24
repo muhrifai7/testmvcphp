@@ -81,15 +81,47 @@ class Snap extends Controller
 
     public function finish()
     {
-        $result = json_decode($_POST['result-data']);
-        // $result = $_POST['transaksi'];s
-
+        $result = json_decode($_POST['transaksi']);
+        $result = $_POST['transaksi'];
+        // craete ke database
         echo 'RESULT <br><pre>';
         var_dump($result);
+
+        echo $result["status_message"];
         echo '</pre>';
+        var_dump($_POST);
+        $this->model('Transaksi_model')->addDataTransaction($_POST["transaksi"]);
         $data["title"] = "Pembayaran Anda";
         $this->view("templates/header", $data);
         $this->view('checkout/konfirmasi');
         $this->view("templates/footer");
     }
 }
+
+// mandiri
+//  ["status_code"]=>
+//   string(3) "201"
+//   ["status_message"]=>
+//   string(25) "Transaksi sedang diproses"
+//   ["transaction_id"]=>
+//   string(36) "dd06c68d-5642-462a-98be-852a323e82a0"
+//   ["order_id"]=>
+//   string(10) "2036393442"
+//   ["gross_amount"]=>
+//   string(8) "10000.00"
+//   ["payment_type"]=>
+//   string(8) "echannel"
+//   ["transaction_time"]=>
+//   string(19) "2020-10-24 11:04:11"
+//   ["transaction_status"]=>
+//   string(7) "pending"
+//   ["fraud_status"]=>
+//   string(6) "accept"
+//   ["bill_key"]=>
+//   string(11) "47201510147"
+//   ["biller_code"]=>
+//   string(5) "70012"
+//   ["pdf_url"]=>
+//   string(94) "https://app.sandbox.midtrans.com/snap/v1/transactions/7f6f9fa7-9612-4b4f-bd22-241ecb4494aa/pdf"
+//   ["finish_redirect_url"]=>
+//   string(88) "http://example.com/finish?order_id=2036393442&status_code=201&transaction_status=pending"

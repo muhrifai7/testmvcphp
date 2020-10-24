@@ -1,6 +1,6 @@
 <?php
 
-define('base_url', 'http://localhost/tryproject/admin_panel/public/');
+define('base_url', 'http://localhost/siakadPayment/public/');
 //DB
 
 define('DB_HOST', 'localhost');
