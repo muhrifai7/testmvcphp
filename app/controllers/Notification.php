@@ -60,35 +60,49 @@ class Notification extends Controller
         $notif["vendorName"] = $vendorName;
         $notif["va_number"] = $va_number;
 
+        $transaction_status = "pending";
         if ($transaction == 'capture') {
-            // For credit card transaction, we need to check whether transaction is challenge by FDS or not
-            if ($type == 'credit_card') {
-                if ($fraud == 'challenge') {
-                    // TODO set payment status in merchant's database to 'Challenge by FDS'
-                    // TODO merchant should decide whether this transaction is authorized or not in MAP
-                    echo "Transaction order_id: " . $order_id . " is challenged by FDS";
-                } else {
-                    // TODO set payment status in merchant's database to 'Success'
-                    echo "Transaction order_id: " . $order_id . " successfully captured using " . $type;
-                }
-            }
         } else if ($transaction == 'settlement') {
-            // TODO set payment status in merchant's database to 'Settlement'
-            $this->model('Notification_model')->handleSettlement($notif);
-            echo "Transaction order_id: " . $order_id . " successfully transfered using " . $type;
+            $transaction_status = "settlement";
         } else if ($transaction == 'pending') {
-            // TODO set payment status in merchant's database to 'Pending'
-            $this->model('Notification_model')->handlePending($notif);
-            echo "Waiting customer to finish transaction order_id: " . $order_id . " using " . $type;
+            $transaction_status = "pending";
         } else if ($transaction == 'deny') {
-            // TODO set payment status in merchant's database to 'Denied'
-            echo "Payment using " . $type . " for transaction order_id: " . $order_id . " is denied.";
+            $transaction_status = "deny";
         } else if ($transaction == 'expire') {
-            // TODO set payment status in merchant's database to 'expire'
-            echo "Payment using " . $type . " for transaction order_id: " . $order_id . " is expired.";
+            $transaction_status = "expire";
         } else if ($transaction == 'cancel') {
-            // TODO set payment status in merchant's database to 'Denied'
-            echo "Payment using " . $type . " for transaction order_id: " . $order_id . " is canceled.";
-        }
+            $transaction_status = "cancel";
+        };
+
+        $paymentParams = [
+            "order_id" => $order_id,
+            "va_numbers" => $notif["va_number"],
+            "transaction_time" => $notif["transaction_time"],
+            "gross_amount" => $notif["gross_amount"],
+            "order_id" => $notif["order_id"],
+            "payment_type" => $notif["payment_type"],
+            "signature_key" => $notif["signature_key"],
+            "status_code" => $notif["status_code"],
+            "transaction_id" => $notif["transaction_id"],
+            "transaction_status" => $transaction_status,
+            "fraud_status" => $notif["fraud_status"],
+            "status_message" => $notif["status_message"],
+        ];
+
+        $this->model('Notification_model')->handlePayment($paymentParams);
+    }
+
+    public function finish()
+    {
+        echo "finish";
+    }
+
+    public function unfinish()
+    {
+        echo "unfinish";
+    }
+    public function error()
+    {
+        echo "erororro";
     }
 }

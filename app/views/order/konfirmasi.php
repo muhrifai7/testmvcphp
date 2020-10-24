@@ -10,16 +10,24 @@
         <!--Section: Products v.3-->
         <section class="mb-4">
             <div class="jumbotron">
-                <h4 class="display-4">Order Id 2321432143214</h4>
-                <h5 class="lead">Status : Pending</h5>
+                <?php
+
+                $payload["order_id"] = "213212132144";
+                $payload["status_message"] = "Pembayaran Sedang Di Proses";
+                $payload["va_numbers"] = "213212132144";
+                $payload["transaction_time"] = "2020-10-14";
+                ?>
+                <h4 class="display-4">Order Id <?= $payload["order_id"] ?></h4>
+                <h5 class="lead">Status : <?= $payload["status_message"] ?></h5>
+
                 <hr class="my-4">
                 <h5 class="lead">Dear Mahasiswa</h5>
                 <p class="lead">Anda telah memilih untuk membayar menggunakan bank transfer. Silakan menyelesaikan pembayaran:</p>
                 <hr class="my-4">
                 <h5 class="lead">Transfer Ke</h5>
                 <p>Bank : BCA</p>
-                <p>Virtual Account Number : 2313432143214</p>
-                <p>atas Pembayaran : 25 Oktober 2020 - 12:55:17 Asia/Jakarta</p>
+                <p>Virtual Account Number : <?= $payload["va_numbers"] ?></p>
+                <p>Batas Pembayaran : <?= $payload["transaction_time"] ?> Asia/Jakarta</p>
                 <hr class="my-4">
                 <p>Kami juga telah mengirimkan Kode pembayaran ke email @example.com</p>
 

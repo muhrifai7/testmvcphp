@@ -10,52 +10,41 @@
 
         <!--Section: Products v.3-->
         <section class="text-center mb-4">
-
-            <!--Grid row-->
-            <div class="row wow fadeIn">
-
-                <!--Grid column-->
-                <div class="col-lg-3 col-md-6 mb-4">
-
-                    <!--Card-->
-                    <div class="card">
-
-                        <!--Card image-->
-                        <div class="view overlay">
-                            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg" class="card-img-top" alt="">
-                            <a>
-                                <div class="mask rgba-white-slight"></div>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Cicilan ke</th>
+                        <th scope="col">jatuh Tempo</th>
+                        <th scope="col">Wajib Bayar</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $colors = array("red", "green", "blue", "yellow");
+                    $no = 0;
+                    foreach ($colors as $value) {
+                        $no++;
+                        echo "<tr>";
+                        echo "<td>" . $no . "</td>";
+                        echo "<td>2020-12-02</td>";
+                        echo "<td>Rp 10,000</td>";
+                        echo '<td>
+                               <a href="' . base_url . 'order" ">
+                                <span class="badge badge-success">Detail</span>
                             </a>
-                        </div>
-                        <!--Card image-->
+                                </td>';
+                        echo "</tr>";
+                    }
 
-                        <!--Card content-->
-                        <div class="card-body text-center">
-                            <!--Category & Title-->
-                            <h5>
-                                <strong>
-                                    <a href="https://kodetr.000webhostapp.com/product.php" class="dark-grey-text">Denim shirt
-                                        <span class="badge badge-pill danger-color">NEW</span>
-                                    </a>
-                                </strong>
-                            </h5>
-                            <h4 class="font-weight-bold blue-text">
-                                <strong>Rp 10.000</strong>
-                                <button type="button" class="btn btn-primary" id="chekout-button">Checkout</button>
+                    ?>
 
-                            </h4>
-                        </div>
-                        <!--Card content-->
+                </tbody>
+            </table>
 
-                    </div>
-                    <!--Card-->
 
-                </div>
-                <!--Grid column-->
 
-                <!--Grid column-->
-
-            </div>
         </section>
         <!--Section: Products v.3-->
 

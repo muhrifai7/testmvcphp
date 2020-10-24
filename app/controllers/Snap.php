@@ -5,6 +5,7 @@ require_once dirname(__FILE__) . '../../vendor/autoload.php';
 
 class Snap extends Controller
 {
+
     public function __construct()
     {
 
@@ -12,14 +13,6 @@ class Snap extends Controller
         Veritrans_Config::$isSanitized = true;
         Veritrans_Config::$isProduction = false;
         Veritrans_Config::$is3ds = true;
-    }
-
-    public function index()
-    {
-        $data["title"] = "Checkout";
-        $this->view("templates/header", $data);
-        $this->view('checkout/index');
-        $this->view("templates/footer");
     }
 
     public function token()
@@ -78,18 +71,19 @@ class Snap extends Controller
 
     public function finish()
     {
-        echo "finish";
-        header('Location: ' . "http://testphppayment.herokuapp.com/public/snap/konfirmasi");
+        $payload = json_decode(file_get_contents('php://input'), true);
+        $payload = $_POST["transaksi"];
+        var_dump($payload);
+        $this->model('Transaksi_model')->postOrder($payload);
+        $this->konfirmasi($payload);
     }
     public function konfirmasi()
     {
-        $result = $_POST['transaksi'];
-        var_dump($_POST["transaksi"]);
         // craete ke database
-        // $this->model('Transaksi_model')->addDataTransaction($_POST["transaksi"]);
-        $data["title"] = "Pembayaran Anda";
+
+        $data["title"] = "Detail Pembayaran Anda";
         $this->view("templates/header", $data);
-        $this->view('checkout/konfirmasi', $result);
+        $this->view('order/konfirmasi');
         $this->view("templates/footer");
     }
 }

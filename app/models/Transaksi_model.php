@@ -50,22 +50,35 @@ class Transaksi_model
         $this->db->bind('bank', $data['bank']);
         $this->db->bind('fraud_status', $data['fraud_status']);
         $this->db->bind('pdf_url', $data['pdf_url']);
+
         $this->db->bind('finish_redirect_url', $data['finish_redirect_url']);
         $this->db->execute();
 
         return $this->db->rowCount();
     }
-    public function addNotif()
+    public function postOrder($data)
     {
-        // echo base_url;
-
-        $query = "INSERT INTO persons
+        $data["detail"] = "Pembayaran Sks";
+        $query = "INSERT INTO orders
                      VALUES
-        			  ('', 'dalamma','fdfff',32)";
+        			  ('', :status_code, :status_message, :transaction_id, :order_id, :gross_amount, :payment_type, :transaction_time, :transaction_status, :va_numbers, :fraud_status,  :detail)";
 
         $this->db->query($query);
-        // $this->db->bind('nip', $res);
-        return $this->db->execute();
+        // $this->db->bind('id', '');
+        $this->db->bind('status_code', $data['status_code']);
+        $this->db->bind('status_message', $data['status_message']);
+        $this->db->bind('transaction_id', $data['transaction_id']);
+        $this->db->bind('order_id', $data['order_id']);
+        $this->db->bind('gross_amount', $data['gross_amount']);
+        $this->db->bind('payment_type', $data['payment_type']);
+        $this->db->bind('transaction_time', $data['transaction_time']);
+        $this->db->bind('transaction_status', $data['transaction_status']);
+        $this->db->bind('va_numbers', $data["va_numbers"][0]["va_number"]);
+        $this->db->bind('fraud_status', $data['fraud_status']);
+        $this->db->bind('detail', $data['detail']);
+        $this->db->execute();
+
+        return $this->db->rowCount();
     }
 }
 

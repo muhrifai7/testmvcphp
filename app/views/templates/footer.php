@@ -51,16 +51,17 @@
         $("#bayar-modal").on("click", function(event) {
             const total = $("#total").val();
             const deskripsi = $("#deskripsi").val();
-            const firstName = "rifai";
-            const lastName = "muh";
-            const email = "muhrifai554@gmail.com";
-            const phone = "082122597253";
+            const firstName = $("#firstName").val();
+            const lastName = $("#lastName").val();
+            const email = $("#email").val();
+            const phone = $("#phoneNumber").val();
+            console.log(total, deskripsi)
             $.ajax({
                 url: "<?= base_url ?>snap/token",
                 cache: false,
                 data: {
                     gross_amount: total,
-                    deskripsi: "pembayaran spp",
+                    deskripsi: deskripsi,
                     email: email,
                     firstName: firstName,
                     lastName: lastName,
@@ -69,31 +70,30 @@
                 method: 'post',
                 success: function(data) {
                     //location = data;
-                    console.warn('dddddd === ', data)
                     snap.pay(data, {
                         onSuccess: function(result) {
-                            $("#payment-form").submit();
+                            // $("#payment-form").submit();
                         },
                         onPending: function(result) {
-                            console.log('okekeke,process pendiing')
+
+                            console.warn('pending === ', data)
                             $.ajax({
                                 url: "<?= base_url ?>snap/finish",
                                 cache: false,
                                 data: {
-                                    transaksi: {
-                                        "konfirmasi": "ajdd"
-                                    },
+                                    transaksi: result
                                 },
                                 method: "post",
                                 success: function(data) {
+                                    console.log(data, 'datatat')
                                     // window.location.href("<?= base_url ?>snap/finish" + data)
                                 }
                             })
                         },
                         onError: function(result) {
-                            changeResult("error", result);
-                            console.log(result.status_message);
-                            $("#payment-form").submit();
+                            // changeResult("error", result);
+                            // console.log(result.status_message);
+                            // $("#payment-form").submit();
                         },
                     });
                 },

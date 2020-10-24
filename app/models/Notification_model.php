@@ -17,11 +17,12 @@ class Notification_model
         $this->db->query('SELECT * FROM transaksi');
         return $this->db->resultSet();
     }
-    public function handlePending($data)
+    public function handlePayment($data)
     {
+        // die();
         $query = "INSERT INTO transaksi
                      VALUES
-        			  ('', :status_code, :status_message, :transaction_id, :order_id, :gross_amount, :payment_type, :transaction_time, :transaction_status, :va_numbers, :bank, :fraud_status, :pdf_url, :finish_redirect_url)";
+        			  ('', :status_code, :status_message, :transaction_id, :order_id, :gross_amount, :payment_type, :transaction_time, :transaction_status, :va_numbers, :signature_key, :fraud_status)";
 
         $this->db->query($query);
         // $this->db->bind('id', '');
@@ -34,10 +35,8 @@ class Notification_model
         $this->db->bind('transaction_time', $data['transaction_time']);
         $this->db->bind('transaction_status', $data['transaction_status']);
         $this->db->bind('va_numbers', $data['va_numbers']);
-        $this->db->bind('bank', $data['bank']);
+        $this->db->bind('signature_key', $data['signature_key']);
         $this->db->bind('fraud_status', $data['fraud_status']);
-        $this->db->bind('pdf_url', $data['pdf_url']);
-        $this->db->bind('finish_redirect_url', $data['finish_redirect_url']);
         $this->db->execute();
 
         return $this->db->rowCount();
@@ -55,6 +54,3 @@ class Notification_model
         return $this->db->execute();
     }
 }
-
-
-// INSERT INTO `transaksi`(`id`, `status_code`, `status_message`, `transaction_id`, `order_id`, `gross_amount`, `payment_type`, `transaction_time`, `transaction_status`, `va_numbers`, `bank`, `fraud_status`, `pdf_url`, `finish_ridirect_url`) VALUES ("","12","dasdsad","dad","","6","7","8","9","10","11","12","13","14")
