@@ -39,7 +39,10 @@ class Notification_model
         $this->db->bind('fraud_status', $data['fraud_status']);
         $this->db->execute();
 
-        return $this->db->rowCount();
+        header('HTTP/1.1 200 OK');
+        echo 'SUCCESS';
+        return;
+        // return $this->db->rowCount();
     }
     public function addNotif()
     {
