@@ -1,6 +1,6 @@
 <?php
 
-define('base_url', 'http://localhost/siakadPayment/public/');
+define('base_url', 'http://testphppayment.herokuapp.com/public/');
 //DB
 
 define('DB_HOST', 'localhost');
