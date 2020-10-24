@@ -8,9 +8,9 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
     <!-- Bootstrap core CSS -->
-    <link href="<?= base_url ?>css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://localhost/siakadPayment/public/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
-    <link href="<?= base_url ?>css/mdb.min.css" rel="stylesheet">
+    <link href="http://localhost/siakadPayment/public/css/mdb.min.css" rel="stylesheet">
 
     <style type="text/css">
         html,
@@ -71,7 +71,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link waves-effect" href="<?= base_url ?>transaksi">Transaksi
+                        <a class="nav-link waves-effect" href="http://localhost/siakadPayment/public/transaksi">Transaksi
                         </a>
                     </li>
 

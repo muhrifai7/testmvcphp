@@ -43,7 +43,7 @@
 <script type="text/javascript">
     $(function() {
         $("#chekout-button").on("click", function() {
-            location.href = "<?= base_url ?>checkout"
+            location.href = "http://localhost/siakadPayment/public/checkout"
 
         });
 
