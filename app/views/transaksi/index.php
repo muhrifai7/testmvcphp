@@ -34,6 +34,7 @@
                                         <th scope="col">Transaksi id</th>
                                         <th scope="col">Order id</th>
                                         <th scope="col">Total</th>
+                                        <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -48,6 +49,12 @@
                                         echo "<td>" . $value['transaction_id'] . "</td>";
                                         echo "<td>" . $value['order_id'] . "</td>";
                                         echo "<td>" . $value['gross_amount'] . "</td>";
+                                        echo '<td>
+                                            <span class="badge badge-danger">Cancel</span>
+                                            <span class="badge badge-primary">Approve</span>
+                                            <span class="badge badge-success">Detail</span>
+                                            </td>';
+
                                         echo "</tr>";
                                     }
 
