@@ -79,7 +79,7 @@ class Snap extends Controller
     public function finish()
     {
         echo "finish";
-        header('Location: ' . "http://localhost/siakadPayment/public/snap/konfirmasi");
+        header('Location: ' . "http://testphppayment.herokuapp.com/public/snap/konfirmasi");
     }
     public function konfirmasi()
     {
