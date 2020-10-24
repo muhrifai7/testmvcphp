@@ -70,36 +70,23 @@
                 success: function(data) {
                     //location = data;
                     console.warn('dddddd === ', data)
-                    var resultType = document.getElementById("result-type");
-                    var resultData = document.getElementById("result-data");
-
-                    function changeResult(type, data) {
-                        $("#result-type").val(type);
-                        $("#result-data").val(JSON.stringify(data));
-                        //resultType.innerHTML = type;
-                        //resultData.innerHTML = JSON.stringify(data);
-                    }
                     snap.pay(data, {
                         onSuccess: function(result) {
-                            changeResult("success", result);
-                            console.log(result.status_message);
-                            console.log(result);
                             $("#payment-form").submit();
                         },
                         onPending: function(result) {
-                            changeResult("pending", result);
-                            console.log(result.status_message);
-                            // $("#payment-form").submit();
                             console.log('okekeke,process pendiing')
                             $.ajax({
                                 url: "<?= base_url ?>snap/finish",
                                 cache: false,
                                 data: {
-                                    transaksi: result
+                                    transaksi: {
+                                        "konfirmasi": "ajdd"
+                                    },
                                 },
                                 method: "post",
                                 success: function(data) {
-                                    console.log(data, 'datatata')
+                                    // window.location.href("<?= base_url ?>snap/finish" + data)
                                 }
                             })
                         },
