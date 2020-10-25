@@ -7,7 +7,7 @@ class Transaksi extends Controller
     {
 
         $data["title"] = "Transaksi";
-        $data['transaksi'] = $this->model('Transaksi_model')->getAll();
+        $data['orders'] = $this->model('Transaksi_model')->getAllOrder();
         $this->view("templates/header", $data);
         $this->view("transaksi/index", $data);
         $this->view("templates/footer");

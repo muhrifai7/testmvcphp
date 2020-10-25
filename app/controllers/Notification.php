@@ -34,7 +34,6 @@ class Notification extends Controller
     public function index()
     {
         $notif = json_decode(file_get_contents('php://input'), true);
-
         $transaction = $notif["transaction_status"];
         $type = $notif["payment_type"];
         $order_id = $notif["order_id"];
@@ -51,6 +50,17 @@ class Notification extends Controller
         }
         */
         // handle signature
+
+        // handle order isPaid
+
+
+        /* cari order di table orderid dengan order id yang diberikan
+        jika ada return response order sudah dibayar
+        jika tidak lanjut
+
+
+        */
+
         $va_number = null;
         $vendorName = null;
         if (!empty($notif["va_number"])) {
@@ -60,7 +70,7 @@ class Notification extends Controller
         $notif["vendorName"] = $vendorName;
         $notif["va_number"] = $va_number;
 
-        $transaction_status = "pending";
+        $transaction_status = null;
         if ($transaction == 'capture') {
         } else if ($transaction == 'settlement') {
             $transaction_status = "settlement";
@@ -89,7 +99,24 @@ class Notification extends Controller
             "status_message" => $notif["status_message"],
         ];
 
-        $this->model('Notification_model')->handlePayment($paymentParams);
+        $payment = $this->model('Notification_model')->handlePayment($paymentParams);
+        // return nya datanya untuk $payment
+
+        if ($payment && $transaction_status) {
+            if ($transaction_status === "settlement") {
+                $order["$order_id"] = $order_id;
+                $order["transaction_status"] = "paid";
+                $order["status"] = "confirmed";
+                // $this->model("Notification_model")->handleUpdateOrder($order);
+                // cari table order berdasarkan orderId dan update data jika ada
+            }
+        }
+        $message = "Payment status is $transaction_status";
+        $response = [
+            "code" => 200,
+            "message" => $message,
+        ];
+        return $response;
     }
 
     public function finish()

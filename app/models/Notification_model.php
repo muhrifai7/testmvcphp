@@ -19,7 +19,6 @@ class Notification_model
     }
     public function handlePayment($data)
     {
-        // die();
         $query = "INSERT INTO transaksi
                      VALUES
         			  ('', :status_code, :status_message, :transaction_id, :order_id, :gross_amount, :payment_type, :transaction_time, :transaction_status, :va_numbers, :signature_key, :fraud_status)";
@@ -39,21 +38,18 @@ class Notification_model
         $this->db->bind('fraud_status', $data['fraud_status']);
         $this->db->execute();
 
-        header('HTTP/1.1 200 OK');
-        echo 'SUCCESS';
-        return;
-        // return $this->db->rowCount();
+        return $this->db->rowCount();
     }
-    public function addNotif()
+    public function handleUpdateOrder($params)
     {
         // echo base_url;
 
-        $query = "INSERT INTO persons
-                     VALUES
-        			  ('', 'dalamma','fdfff',32)";
-
+        $query = "UPDATE orders SET transaction_status=:transaction_status, WHERE order_id=:order_id";
         $this->db->query($query);
-        // $this->db->bind('nip', $res);
+        $this->db->bind('transaction_status', $params['transaction_status']);
+        // $this->db->bind('status', $params['status']);
+        $this->db->bind('order_id', $params['order_id']);
         return $this->db->execute();
+        return $this->db->rowCount();
     }
 }

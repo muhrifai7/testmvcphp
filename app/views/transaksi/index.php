@@ -40,7 +40,7 @@
                                 <tbody>
                                     <?php
                                     $no = 0;
-                                    foreach ($data["transaksi"] as $value) {
+                                    foreach ($data["orders"] as $value) {
                                         $no++;
                                         echo "<tr>";
                                         echo "<td>" . $no . "</td>";

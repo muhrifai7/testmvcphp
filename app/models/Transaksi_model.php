@@ -10,9 +10,10 @@ class Transaksi_model
         $this->db = new Database;
     }
 
-    public function getAll()
+    public function getAllOrder()
     {
-        $this->db->query('SELECT * FROM transaksi');
+
+        $this->db->query('SELECT * FROM orders');
         return $this->db->resultSet();
     }
     public function addDataTransaction($data)
