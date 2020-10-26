@@ -81,7 +81,7 @@ class Transaksi_model
 
         return $this->db->rowCount();
     }
-    public function getAllUser()
+    public function getAllTodo()
     {
         $this->db->query('SELECT * FROM todo');
         return $this->db->resultSet();
@@ -131,8 +131,3 @@ class Transaksi_model
         return $this->db->rowCount();
     }
 }
-
-
-
-
-// INSERT INTO `transaksi`(`id`, `status_code`, `status_message`, `transaction_id`, `order_id`, `gross_amount`, `payment_type`, `transaction_time`, `transaction_status`, `va_numbers`, `bank`, `fraud_status`, `pdf_url`, `finish_ridirect_url`) VALUES ("","12","dasdsad","dad","","6","7","8","9","10","11","12","13","14")
