@@ -81,7 +81,58 @@ class Transaksi_model
 
         return $this->db->rowCount();
     }
+    public function getAllUser()
+    {
+        $this->db->query('SELECT * FROM todo');
+        return $this->db->resultSet();
+    }
+
+
+    // =======================================
+
+    public function updateTodo($data)
+    {
+        $id = $data["id"];
+        echo $id;
+        $query = "UPDATE `todo` SET ``, title = :title, description = :description, isDone = :isDone WHERE id = :id";
+        $this->db->query($query);
+        $this->db->bind('id', $id);
+        $this->db->bind('title', $data['title']);
+        $this->db->bind('description', $data['description']);
+        $this->db->bind('isDone', $data['isDone']);
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
+
+    public function addTodo($data)
+    {
+
+        $query = "INSERT INTO todo
+                     VALUES
+        			  ('', :title, :description, :isDone)";
+
+        $this->db->query($query);
+        // $this->db->bind('id', '');
+        $this->db->bind('title', $data['title']);
+        $this->db->bind('description', $data['description']);
+        $this->db->bind('isDone', $data['isDone']);
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
+    public function deleteTodo($id)
+    {
+        $query = "DELETE FROM todo WHERE id = :id";
+        $this->db->query($query);
+        $this->db->bind("id", $id);
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
 }
+
+
 
 
 // INSERT INTO `transaksi`(`id`, `status_code`, `status_message`, `transaction_id`, `order_id`, `gross_amount`, `payment_type`, `transaction_time`, `transaction_status`, `va_numbers`, `bank`, `fraud_status`, `pdf_url`, `finish_ridirect_url`) VALUES ("","12","dasdsad","dad","","6","7","8","9","10","11","12","13","14")

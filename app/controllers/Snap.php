@@ -86,4 +86,59 @@ class Snap extends Controller
         $this->view('order/konfirmasi');
         $this->view("templates/footer");
     }
+
+    public function charge()
+    {
+        $notif = json_decode(file_get_contents('php://input'), true);
+        var_dump($notif);
+        // $gross_amount = $_POST["gross_amount"];
+        // $deskripsi = $_POST["deskripsi"];
+        // $firstName = $_POST["firstName"];
+        // $lastName = $_POST["lastName"];
+        // $email = $_POST["email"];
+        // $phone = $_POST["phone"];
+        // Requied
+        $transaction_details = array(
+            'order_id' => rand(),
+            'gross_amount' => 10000, // no decimal allowed for creditcard
+        );
+
+        // Optional
+        $item1_details = array(
+            'id' => 'a1',
+            'price' => 10000,
+            'quantity' => 1,
+            'name' => "spp"
+        );
+
+        // Optional
+        $item_details = array($item1_details);
+
+
+
+        // Optional
+        $customer_details = array(
+            'first_name'    => "test",
+            'last_name'     => "test",
+            'email'         => "test@gmail.com",
+            'phone'         => "082122597253",
+
+        );
+
+        // Data yang akan dikirim untuk request redirect_url.
+        $credit_card['secure'] = true;
+        //ser save_card true to enable oneclick or 2click
+        //$credit_card['save_card'] = true;
+
+
+        $transaction = array(
+            'transaction_details' => $transaction_details,
+            'item_details'       => $item_details,
+            'customer_details'   => $customer_details,
+            'credit_card'        => $credit_card,
+        );
+
+        $snapToken = Veritrans_Snap::getSnapToken($transaction);
+        echo $snapToken;
+    }
 }
