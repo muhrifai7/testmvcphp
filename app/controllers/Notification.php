@@ -35,44 +35,35 @@ class Notification extends Controller
     {
         $notif = json_decode(file_get_contents('php://input'), true);
         $transaction = $notif["transaction_status"];
-        $type = $notif["payment_type"];
         $order_id = $notif["order_id"];
         $status_code = $notif["status_code"];
-        $fraud = $notif["fraud_status"];
         $gross_amount = $notif["gross_amount"];
+
+
         // handle signature
-        /*
-        $validSignatureKey = hash("sha512", $order_id, $status_code, $gross_amount, "SB-Mid-server-gxOdmq1-eNsrN5ZBiu6SRYpt");
-        echo $validSignatureKey;
-        if($notif["signature_key"] !== $validSignatureKey){
+        $validSignatureKey = hash("sha512", $order_id . $status_code . $gross_amount . "SB-Mid-server-gxOdmq1-eNsrN5ZBiu6SRYpt");
+        // echo $validSignatureKey;
+        if ($validSignatureKey !== $notif["signature_key"]) {
             return "error";
             exit();
         }
-        */
-        // handle signature
-
-        // handle order isPaid
-
-
-        /* cari order di table orderid dengan order id yang diberikan
-        jika ada return response order sudah dibayar
-        jika tidak lanjut
-
-
-        */
 
         $va_number = null;
         $vendorName = null;
-        if (!empty($notif["va_number"])) {
-            $va_number = $notif["va_number"];
-            $vendorName = $notif["vendorName"];
-        };
+        if (array_key_exists("permata_va_number", $notif)) {
+            $va_number = $notif["permata_va_number"];
+        }
+        if (array_key_exists("va_numbers", $notif)) {
+            $va_number = $notif["va_numbers"][0]["va_number"];
+            $vendorName = $notif["va_numbers"][0]["bank"];
+        }
+        if (array_key_exists("approval_code", $notif)) $va_number = $notif["approval_code"];
+
         $notif["vendorName"] = $vendorName;
         $notif["va_number"] = $va_number;
 
         $transaction_status = null;
-        if ($transaction == 'capture') {
-        } else if ($transaction == 'settlement') {
+        if ($transaction == 'settlement') {
             $transaction_status = "settlement";
         } else if ($transaction == 'pending') {
             $transaction_status = "pending";
@@ -95,7 +86,6 @@ class Notification extends Controller
             "status_code" => $notif["status_code"],
             "transaction_id" => $notif["transaction_id"],
             "transaction_status" => $transaction_status,
-            "fraud_status" => $notif["fraud_status"],
             "status_message" => $notif["status_message"],
         ];
 
@@ -104,11 +94,10 @@ class Notification extends Controller
 
         if ($payment && $transaction_status) {
             if ($transaction_status === "settlement") {
-                $order["$order_id"] = $order_id;
+                $order["order_id"] = $order_id;
                 $order["transaction_status"] = "paid";
                 $order["status"] = "confirmed";
-                // $this->model("Notification_model")->handleUpdateOrder($order);
-                // cari table order berdasarkan orderId dan update data jika ada
+                $this->model("Notification_model")->handleUpdateOrder($order);
             }
         }
         $message = "Payment status is $transaction_status";

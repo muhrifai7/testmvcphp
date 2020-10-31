@@ -43,12 +43,14 @@ class Notification_model
     public function handleUpdateOrder($params)
     {
         // echo base_url;
-
-        $query = "UPDATE orders SET transaction_status=:transaction_status, WHERE order_id=:order_id";
+        var_dump($params);
+        $order_id = $params['order_id'];
+        // die();
+        $query = "UPDATE orders SET transaction_status=:transaction_status, WHERE id = 7";
         $this->db->query($query);
         $this->db->bind('transaction_status', $params['transaction_status']);
         // $this->db->bind('status', $params['status']);
-        $this->db->bind('order_id', $params['order_id']);
+        // $this->db->bind('order_id', $params['order_id']);
         return $this->db->execute();
         return $this->db->rowCount();
     }

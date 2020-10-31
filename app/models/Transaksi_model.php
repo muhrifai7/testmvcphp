@@ -59,6 +59,7 @@ class Transaksi_model
     }
     public function postOrder($data)
     {
+
         $data["detail"] = "Pembayaran Sks";
         $query = "INSERT INTO orders
                      VALUES
@@ -74,7 +75,7 @@ class Transaksi_model
         $this->db->bind('payment_type', $data['payment_type']);
         $this->db->bind('transaction_time', $data['transaction_time']);
         $this->db->bind('transaction_status', $data['transaction_status']);
-        $this->db->bind('va_numbers', $data["va_numbers"][0]["va_number"]);
+        $this->db->bind('va_numbers', $data["va_number"]);
         $this->db->bind('fraud_status', $data['fraud_status']);
         $this->db->bind('detail', $data['detail']);
         $this->db->execute();

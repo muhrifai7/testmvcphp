@@ -73,10 +73,12 @@
                     snap.pay(data, {
                         onSuccess: function(result) {
                             // $("#payment-form").submit();
+                            console.log(result, 'sucess')
                         },
                         onPending: function(result) {
 
-                            console.warn('pending === ', data)
+                            /* You may add your own js here, this is just example */
+                            document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
                             $.ajax({
                                 url: "<?= base_url ?>snap/finish",
                                 cache: false,
@@ -91,6 +93,7 @@
                             })
                         },
                         onError: function(result) {
+                            console.log(result, 'resulterror')
                             // changeResult("error", result);
                             // console.log(result.status_message);
                             // $("#payment-form").submit();

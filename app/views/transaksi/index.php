@@ -24,7 +24,7 @@
 
                         <!--Card-->
                         <div class="card">
-
+                            <pre><div id="result-json">JSON result will appear here after payment:<br></div></pre>
                             <table class="table">
                                 <thead class="thead-dark">
                                     <tr>

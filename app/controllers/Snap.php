@@ -53,7 +53,7 @@ class Snap extends Controller
         );
 
         // Data yang akan dikirim untuk request redirect_url.
-        $credit_card['secure'] = true;
+        $credit_card['secure'] = false;
         //ser save_card true to enable oneclick or 2click
         //$credit_card['save_card'] = true;
 
@@ -73,7 +73,16 @@ class Snap extends Controller
     {
         $payload = json_decode(file_get_contents('php://input'), true);
         $payload = $_POST["transaksi"];
-        var_dump($payload);
+        $va_number = null;
+        if (array_key_exists("permata_va_number", $payload)) {
+            $va_number = $payload["permata_va_number"];
+        }
+        if (array_key_exists("va_numbers", $payload)) {
+            $va_number = $payload["va_numbers"][0]["va_number"];
+        }
+        if (array_key_exists("approval_code", $payload)) $va_number = $payload["approval_code"];
+        $payload["va_number"] = $va_number;
+
         $this->model('Transaksi_model')->postOrder($payload);
         $this->konfirmasi($payload);
     }
@@ -90,7 +99,6 @@ class Snap extends Controller
     public function charge()
     {
         $notif = json_decode(file_get_contents('php://input'), true);
-        var_dump($notif);
         // $gross_amount = $_POST["gross_amount"];
         // $deskripsi = $_POST["deskripsi"];
         // $firstName = $_POST["firstName"];
@@ -102,21 +110,6 @@ class Snap extends Controller
             'order_id' => rand(),
             'gross_amount' => 10000, // no decimal allowed for creditcard
         );
-
-        // Optional
-        $item1_details = array(
-            'id' => 'a1',
-            'price' => 10000,
-            'quantity' => 1,
-            'name' => "spp"
-        );
-
-        // Optional
-        $item_details = array($item1_details);
-
-
-
-        // Optional
         $customer_details = array(
             'first_name'    => "test",
             'last_name'     => "test",
@@ -133,9 +126,7 @@ class Snap extends Controller
 
         $transaction = array(
             'transaction_details' => $transaction_details,
-            'item_details'       => $item_details,
             'customer_details'   => $customer_details,
-            'credit_card'        => $credit_card,
         );
 
         $snapToken = Veritrans_Snap::getSnapToken($transaction);
